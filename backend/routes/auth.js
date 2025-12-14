@@ -1,12 +1,18 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+
 const router = express.Router();
 
 // Register
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, userType, phone, address } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !password || !userType) {
+      return res.status(400).json({ message: 'Name, email, password and userType are required' });
+    }
 
     // Validate userType
     if (!['admin', 'client', 'supplier'].includes(userType)) {
@@ -33,7 +39,21 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Register error:', error);
+    // Mongoose validation error
+    if (error.name === 'ValidationError') {
+      const errors = Object.keys(error.errors).reduce((acc, key) => {
+        acc[key] = error.errors[key].message;
+        return acc;
+      }, {});
+      return res.status(400).json({ message: 'Validation failed', errors });
+    }
+    // Duplicate key (e.g., unique email)
+    if (error.code === 11000) {
+      return res.status(400).json({ message: 'Email already registered' });
+    }
+    // Generic fallback
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -66,9 +86,17 @@ router.post('/login', async (req, res) => {
       { expiresIn: '24h' }
     );
 
+    // Determine redirect URL based on userType
+    const redirectUrls = {
+      admin: '/admin/dashboard',
+      supplier: '/supplier/dashboard',
+      client: '/client/dashboard',
+    };
+
     res.json({
       message: 'Login successful',
       token,
+      redirectUrl: redirectUrls[user.userType],
       user: {
         id: user._id,
         name: user.name,
@@ -77,8 +105,9 @@ router.post('/login', async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-module.exports = router;
+export default router;
