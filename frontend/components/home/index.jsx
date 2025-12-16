@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight, User, Mail, Phone, Building2, Package, MessageSquare, Send } from "lucide-react";
+import { ScrollNavigator } from "@/components/ui/ScrollNavigator";
 
 const steps = [
   {
@@ -699,6 +700,7 @@ export function HomeLanding() {
       <ReviewsSection />
       <CompanySlider />
       <ContactForm />
+      <ScrollNavigator />
     </>
   );
 }
