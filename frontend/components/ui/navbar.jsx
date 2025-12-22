@@ -27,7 +27,7 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-[100px] py-6">
         <Link href="/" className="flex items-center">
-          <Image src="/images/hirehubLogo.png" alt="Logo" width={100} height={100} />
+       <Image src="/images/hirehubLogo.png" alt="Logo" width={100} height={100} />
         </Link>
         
         {/* Desktop Navigation */}
@@ -39,7 +39,7 @@ export function Header() {
               className="text-gray-500 hover:text-black transition-colors"
             >
               {link.label}
-            </Link>
+          </Link>
           ))}
           <Link href="/login">
             <button 
