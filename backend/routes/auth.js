@@ -57,10 +57,16 @@ router.post('/register', async (req, res) => {
   }
 });
 
+const redirectUrls = {
+  admin: '/admin/dashboard',
+  supplier: '/supplier/dashboard',
+  client: '/client/dashboard',
+};
+
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, userType: requestedUserType } = req.body;
 
     // Validate input
     if (!email || !password) {
@@ -79,19 +85,19 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // If frontend sends an expected role, enforce it to prevent cross-portal logins
+    if (requestedUserType && requestedUserType !== user.userType) {
+      return res.status(403).json({
+        message: `This account is registered as ${user.userType}. Use the correct portal to log in.`,
+      });
+    }
+
     // Generate JWT token
     const token = jwt.sign(
       { id: user._id, email: user.email, userType: user.userType },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
-
-    // Determine redirect URL based on userType
-    const redirectUrls = {
-      admin: '/admin/dashboard',
-      supplier: '/supplier/dashboard',
-      client: '/client/dashboard',
-    };
 
     res.json({
       message: 'Login successful',
@@ -106,6 +112,40 @@ router.post('/login', async (req, res) => {
     });
   } catch (error) {
     console.error('Login error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Return the logged-in user's profile using the JWT (useful for client-side redirects)
+router.get('/me', async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith('Bearer ')) {
+      return res.status(401).json({ message: 'No token provided' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        userType: user.userType,
+      },
+      redirectUrl: redirectUrls[user.userType],
+    });
+  } catch (error) {
+    console.error('Profile lookup error:', error);
+    if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Invalid or expired token' });
+    }
     res.status(500).json({ message: 'Internal server error' });
   }
 });
