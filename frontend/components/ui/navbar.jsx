@@ -13,7 +13,7 @@ export function Header() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/categories', label: 'Equipments' },
+    { href: '/equipments', label: 'Equipments' },
     { href: '/portal', label: 'HireHub Portal' },
     { href: '/contact', label: 'Contact Us' },
   ];
