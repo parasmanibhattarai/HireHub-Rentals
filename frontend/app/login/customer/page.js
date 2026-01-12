@@ -12,7 +12,7 @@ export default function CustomerLoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Bypass authentication and go directly to dashboard
+    // Bypass authentication and go directly to customer dashboard
     router.push('/dashboard/customer');
   };
 
