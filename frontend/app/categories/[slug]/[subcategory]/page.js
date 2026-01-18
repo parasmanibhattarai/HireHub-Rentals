@@ -48,36 +48,11 @@ export default function SubcategoryPage() {
           {description}
         </motion.p>
 
-        {/* Three Sub Sections */}
+        {/* Two Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          {/* Left Column - Product Overview and Key Specs Stacked */}
+          {/* Left Column - Key Features and Quick Contact Stacked */}
           <div className="space-y-8">
-            {/* Product Overview */}
-            <motion.div
-              className="bg-white p-6 rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-xl hover:border-orange-400 hover:-translate-y-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <h2 className="mb-4 text-2xl cursor-pointer group">
-                <span className="text-black inline-block mr-3 group-hover:text-yellow-400 transition-colors duration-300">
-                  Product
-                </span>
-                <span className="text-yellow-400 inline-block group-hover:text-black transition-colors duration-300">
-                  overview
-                </span>
-              </h2>
-              <p className="text-gray-800 text-sm mb-2">
-                HireHub connects you with top suppliers across Sydney, offering a wide range of options:
-                premium units, standard models, and budget-friendly alternatives for your project needs.
-              </p>
-              <p className="text-gray-800 text-sm">
-                Because we broker it, you don&apos;t have to manage multiple vendors – you can compare options,
-                negotiate pricing, and secure the best value for your requirements.
-              </p>
-            </motion.div>
-
-            {/* Key Specs */}
+            {/* Key Features */}
             <motion.div
               className="bg-white p-6 rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-xl hover:border-yellow-400 hover:-translate-y-2"
               initial={{ opacity: 0, y: 20 }}
@@ -89,7 +64,7 @@ export default function SubcategoryPage() {
                   Key
                 </span>
                 <span className="text-yellow-400 inline-block group-hover:text-black transition-colors duration-300">
-                  Specs
+                  Features
                 </span>
               </h2>
               <div className="grid grid-cols-2 gap-3">
@@ -166,18 +141,96 @@ export default function SubcategoryPage() {
                 </motion.div>
               </div>
             </motion.div>
+
+            {/* Quick Contact Section */}
+            <motion.div 
+              className="bg-white px-8 py-6 rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-xl hover:border-yellow-400 hover:-translate-y-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: 0.25 }}
+            >
+              <h2 className="mb-3 text-2xl cursor-pointer group">
+                <span className="text-black inline-block mr-3 group-hover:text-yellow-400 transition-colors duration-300">
+                  Quick
+                </span>
+                <span className="text-yellow-400 inline-block group-hover:text-black transition-colors duration-300">
+                  Contact
+                </span>
+              </h2>
+              
+              <div className="space-y-4">
+                {/* Form Fields */}
+                <div className="space-y-3">
+                  {/* Full Name and Phone Number - Side by Side */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="quick-name" className="text-sm text-gray-700 mb-1 block">
+                        Full Name
+                      </label>
+                      <input 
+                        id="quick-name" 
+                        placeholder="John Smith" 
+                        className="w-full h-10 px-3 bg-white border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="quick-phone" className="text-sm text-gray-700 mb-1 block">
+                        Phone Number
+                      </label>
+                      <input 
+                        id="quick-phone" 
+                        type="tel" 
+                        placeholder="0400 000 000" 
+                        className="w-full h-10 px-3 bg-white border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none transition-colors"
+                      />
+                    </div>
+                  </div>
+                  {/* Email Address - Full Width */}
+                  <div>
+                    <label htmlFor="quick-email" className="text-sm text-gray-700 mb-1 block">
+                      Email Address
+                    </label>
+                    <input 
+                      id="quick-email" 
+                      type="email" 
+                      placeholder="john@example.com" 
+                      className="w-full h-10 px-3 bg-white border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none transition-colors"
+                    />
+                  </div>
+                  {/* What are you after - Full Width */}
+                  <div>
+                    <label htmlFor="quick-message" className="text-sm text-gray-700 mb-1 block">
+                      What are you after
+                    </label>
+                    <textarea 
+                      id="quick-message" 
+                      placeholder="Tell us about your requirements..." 
+                      rows={3}
+                      className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none resize-none"
+                    />
+                  </div>
+                </div>
+                
+                {/* Submit Button */}
+                <div>
+                  <button className="bg-yellow-400 text-black hover:bg-yellow-500 px-10 py-3 rounded-full w-full whitespace-nowrap transition-all duration-300 font-medium">
+                    Send Enquiry
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
           {/* Right Column - Image Only */}
           <div>
             {/* Image Box */}
             <motion.div
-              className="bg-white p-6 rounded-lg border border-gray-200 transition-all duration-200 hover:shadow-xl hover:border-blue-400 hover:-translate-y-2"
+              className="bg-white p-6 rounded-lg border border-gray-200 transition-all duration-200 hover:shadow-xl hover:border-blue-400 hover:-translate-y-2 h-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, delay: 0.2 }}
             >
-              <div className="rounded-lg overflow-hidden h-[480px] relative">
+              <div className="rounded-lg overflow-hidden h-full relative min-h-[500px]">
                 <Image
                   src={subcategory.image}
                   alt={`${title} equipment hire`}
@@ -189,113 +242,56 @@ export default function SubcategoryPage() {
           </div>
         </div>
 
-        {/* Quick Contact Section - Full Width Below Both Columns */}
+        {/* Quick Contact Options - Outside the box */}
         <motion.div 
-          className="bg-white px-16 py-4 rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-xl hover:border-yellow-400 hover:-translate-y-2 mb-12"
+          className="flex flex-wrap items-center justify-center gap-10 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, delay: 0.25 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
         >
-          <h2 className="mb-3 text-2xl cursor-pointer group">
-            <span className="text-black inline-block mr-3 group-hover:text-yellow-400 transition-colors duration-300">
-              Quick
-            </span>
-            <span className="text-yellow-400 inline-block group-hover:text-black transition-colors duration-300">
-              Contact
-            </span>
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-end">
-            {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label htmlFor="quick-name" className="text-sm text-gray-700 mb-1 block">
-                  Full Name
-                </label>
-                <input 
-                  id="quick-name" 
-                  placeholder="John Smith" 
-                  className="w-full h-10 px-3 bg-white border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label htmlFor="quick-phone" className="text-sm text-gray-700 mb-1 block">
-                  Phone Number
-                </label>
-                <input 
-                  id="quick-phone" 
-                  type="tel" 
-                  placeholder="0400 000 000" 
-                  className="w-full h-10 px-3 bg-white border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label htmlFor="quick-email" className="text-sm text-gray-700 mb-1 block">
-                  Email Address
-                </label>
-                <input 
-                  id="quick-email" 
-                  type="email" 
-                  placeholder="john@example.com" 
-                  className="w-full h-10 px-3 bg-white border border-gray-300 rounded-lg focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none transition-colors"
-                />
-              </div>
+          <motion.a 
+            href="tel:1300000000"
+            className="flex items-center gap-3 cursor-pointer group"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="bg-blue-50 p-3 rounded-full group-hover:bg-blue-100 transition-colors">
+              <Phone className="w-6 h-6 text-blue-600" />
             </div>
-            
-            {/* Submit Button */}
-            <div>
-              <button className="bg-yellow-400 text-black hover:bg-yellow-500 px-10 py-2.5 rounded-full whitespace-nowrap transition-all duration-300 font-medium">
-                Send Enquiry
-              </button>
+            <div className="text-left">
+              <div className="text-xs text-gray-500">Call us</div>
+              <div className="text-sm text-gray-900 group-hover:text-blue-600 transition-colors">1300 000 000</div>
             </div>
-          </div>
+          </motion.a>
           
-          {/* Quick Contact Options Below */}
-          <div className="flex flex-wrap items-center justify-center gap-10 mt-4 pt-4 border-t border-gray-200">
-            <motion.a 
-              href="tel:1300000000"
-              className="flex items-center gap-3 cursor-pointer group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="bg-blue-50 p-3 rounded-full group-hover:bg-blue-100 transition-colors">
-                <Phone className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="text-left">
-                <div className="text-xs text-gray-500">Call us</div>
-                <div className="text-sm text-gray-900 group-hover:text-blue-600 transition-colors">1300 000 000</div>
-              </div>
-            </motion.a>
-            
-            <motion.a 
-              href="mailto:hello@hirehub.com.au"
-              className="flex items-center gap-3 cursor-pointer group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="bg-orange-50 p-3 rounded-full group-hover:bg-orange-100 transition-colors">
-                <Mail className="w-6 h-6 text-orange-600" />
-              </div>
-              <div className="text-left">
-                <div className="text-xs text-gray-500">Email us</div>
-                <div className="text-sm text-gray-900 group-hover:text-orange-600 transition-colors">hello@hirehub.com.au</div>
-              </div>
-            </motion.a>
-            
-            <motion.div 
-              className="flex items-center gap-3 cursor-pointer group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="bg-green-50 p-3 rounded-full group-hover:bg-green-100 transition-colors">
-                <MessageSquare className="w-6 h-6 text-green-600" />
-              </div>
-              <div className="text-left">
-                <div className="text-xs text-gray-500">Message us</div>
-                <div className="text-sm text-gray-900 group-hover:text-green-600 transition-colors">Send a message</div>
-              </div>
-            </motion.div>
-          </div>
+          <motion.a 
+            href="mailto:hello@hirehub.com.au"
+            className="flex items-center gap-3 cursor-pointer group"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="bg-orange-50 p-3 rounded-full group-hover:bg-orange-100 transition-colors">
+              <Mail className="w-6 h-6 text-orange-600" />
+            </div>
+            <div className="text-left">
+              <div className="text-xs text-gray-500">Email us</div>
+              <div className="text-sm text-gray-900 group-hover:text-orange-600 transition-colors">hello@hirehub.com.au</div>
+            </div>
+          </motion.a>
+          
+          <motion.div 
+            className="flex items-center gap-3 cursor-pointer group"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="bg-green-50 p-3 rounded-full group-hover:bg-green-100 transition-colors">
+              <MessageSquare className="w-6 h-6 text-green-600" />
+            </div>
+            <div className="text-left">
+              <div className="text-xs text-gray-500">Message us</div>
+              <div className="text-sm text-gray-900 group-hover:text-green-600 transition-colors">Send a message</div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Get a Free Quote Button */}
@@ -357,4 +353,3 @@ export default function SubcategoryPage() {
     </div>
   );
 }
-
